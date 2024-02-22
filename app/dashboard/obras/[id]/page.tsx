@@ -5,7 +5,7 @@ import React, { Suspense } from "react";
 const Page = ({ params }: { params: { id: string } }) => {
   console.log(params.id, "param");
   return (
-    <main className="flex bg-neutral-100 min-h-screen md:min-h-full md:rounded-xl p-1 md:p-3">
+    <main className="flex bg-neutral-100 h-full overflow-auto md:min-h-full md:rounded-xl p-1 md:p-3">
       <div className="flex gap-5 flex-col flex-1">
         <section className="w-full flex flex-col   md:min-h-[200px] gap-5 md:flex-row">
           <div className=" w-full md:w-1/2 min-h-[100px] ">

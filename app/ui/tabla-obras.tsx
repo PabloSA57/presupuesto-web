@@ -87,7 +87,7 @@ const Tabla = async ({
                     <span className=" md:text-xs text-neutral-500">100%</span>
                   </div>
                 </td>
-                <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-thin text-neutral-600">
+                <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-thin text-neutral-700">
                   {d?.direction}
                 </td>
               </tr>

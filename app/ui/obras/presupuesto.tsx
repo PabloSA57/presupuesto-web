@@ -6,6 +6,7 @@ import ListCostos from "../list-costos";
 import { BiEdit } from "react-icons/bi";
 import FormUpdateJob from "./form-updte-budgetjob";
 import DeleteJob from "./button-delete";
+import CardJob from "./card-job";
 
 const Presupuesto = async ({ id_obra }: { id_obra: string }) => {
   const supabase = createClient(cookies());
@@ -35,7 +36,13 @@ const Presupuesto = async ({ id_obra }: { id_obra: string }) => {
         )}
       </header>
 
-      <table className="w-full">
+      <section className=" sm:hidden flex flex-col gap-2">
+        {budget_job?.map((p) => (
+          <CardJob key={p.id} job={p} id_obra={id_obra} />
+        ))}
+      </section>
+
+      <table className="w-full hidden sm:table">
         <thead>
           <tr className="text-xs md:text-sm font-thin ">
             <th className="w-[50%] p-2 text-start">Nombre</th>
