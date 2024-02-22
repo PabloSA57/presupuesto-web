@@ -3,10 +3,8 @@ import SideBar from "@/app/ui/dashboard/sidebar";
 
 const layout = ({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) => {
   return (
     <div className=" min-h-screen w-full bg-neutral-900 relative md:flex md:gap-4">
