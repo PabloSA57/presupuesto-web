@@ -13,7 +13,10 @@ const ButtonModal = ({
 }) => {
   const [modal, setModal] = useState(false);
 
-  const handleModal = () => setModal(!modal);
+  const handleModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    setModal(!modal);
+  };
   return (
     <>
       <button onClick={handleModal} className={style}>

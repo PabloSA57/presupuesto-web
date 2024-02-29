@@ -6,6 +6,9 @@ import { FaLocationPin } from "react-icons/fa6";
 import CardInfo from "../card-info";
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from "next/headers";
+import ButtonModal from "./btn-modal";
+import { FiEdit } from "react-icons/fi";
+import FormUpdateObra from "./form-update-obra";
 
 const HeroObra = async ({ obra_id }: { obra_id: number | string }) => {
   const supabase = createClient(cookies());
@@ -17,13 +20,16 @@ const HeroObra = async ({ obra_id }: { obra_id: number | string }) => {
     .single();
 
   return (
-    <div className=" p-2 lg:p-4 rounded-xl bg-white ">
+    <div className=" p-2 lg:p-4 relative rounded-xl bg-white ">
       <header className=" flex w-full justify-between">
         <h4 className=" font-bold">{obra?.name}</h4>
 
-        <button className=" border-none w-fit h-fit p-2 rounded-md">
-          <BiEdit />
-        </button>
+        <ButtonModal
+          style="absolute right-0 border-none active:text-red-400 p-1 w-fit h-fit text-base md:text-lg"
+          content={<FiEdit />}
+        >
+          <FormUpdateObra obra={obra} />
+        </ButtonModal>
       </header>
 
       <div className="flex">

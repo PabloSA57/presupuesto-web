@@ -1,11 +1,20 @@
 import React from "react";
+
 import { FiEdit } from "react-icons/fi";
 
-import { RiDeleteBinLine } from "react-icons/ri";
 import ButtonModal from "./btn-modal";
 import FormUpdateJob from "./form-updte-budgetjob";
+import { DeleteJob } from "../button";
 
-const CardJob = ({ job, id_obra }: { job: any; id_obra: string }) => {
+const CardJob = ({
+  job,
+  id_obra,
+  isEdit,
+}: {
+  job: any;
+  id_obra: string;
+  isEdit: boolean;
+}) => {
   const total = job.price_labour * job?.meter;
 
   return (
@@ -19,15 +28,18 @@ const CardJob = ({ job, id_obra }: { job: any; id_obra: string }) => {
         <h3 className="text-red-500 font-semibold text-base">${total}</h3>
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-2 text-lg">
-        <ButtonModal
-          style="border-none p-1 w-fit h-fit text-md"
-          content={<RiDeleteBinLine />}
-        >
-          <FormUpdateJob budget_job={job} id_obra={id_obra} />
-        </ButtonModal>
-        <FiEdit />
-      </div>
+      {isEdit && (
+        <div className="flex flex-col justify-center items-center gap-2 text-lg">
+          <ButtonModal
+            style="border-none active:text-red-400 p-1 w-fit h-fit text-lg"
+            content={<FiEdit />}
+          >
+            <FormUpdateJob budget_job={job} id_obra={id_obra} />
+          </ButtonModal>
+
+          <DeleteJob id_job={job.id} id_obra={id_obra} />
+        </div>
+      )}
     </div>
   );
 };

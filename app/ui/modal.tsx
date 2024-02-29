@@ -14,20 +14,23 @@ const Modal = ({
 }: {
   children: React.ReactNode;
   type: "server" | "client";
-  onClose?: () => void;
+  onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
   const overlay = useRef(null);
   const wrapper = useRef(null);
   const router = useRouter();
 
-  const onDismiss = useCallback(() => {
-    if (type === "client" && onClose) {
-      console.log("aqui");
-      onClose();
-      return;
-    }
-    router.back();
-  }, [router, onClose, type]);
+  const onDismiss = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (type === "client" && onClose) {
+        console.log("aqui");
+        onClose(e);
+        return;
+      }
+      router.back();
+    },
+    [router, onClose, type]
+  );
 
   useEffect(() => {
     overlay.current || wrapper.current

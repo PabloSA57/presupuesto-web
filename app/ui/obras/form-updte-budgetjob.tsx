@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Input from "../input";
 import { useFormState } from "react-dom";
 import { upadteJob } from "@/app/libs/actions";
-import Submit from "../submit";
+import { Submit } from "../button";
 
 type Jobs = {
   created_at: string;
@@ -61,7 +61,9 @@ const FormUpdateJob = ({
         />
         <Submit isDisabled={meter == budget_job.meter} text="Actualizar" />
 
-        {state?.message && <p>{state?.message}</p>}
+        {state?.message && (
+          <p className=" text-sm text-green-800">{state?.message}</p>
+        )}
       </form>
     </div>
   );
