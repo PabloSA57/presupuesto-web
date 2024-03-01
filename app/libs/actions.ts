@@ -230,3 +230,12 @@ export async function upadteCharged(prevState: any,formData: FormData, id: numbe
       message:'Se actualizo correctamente'
     }
 }
+
+
+export async function signOut() {
+  const {error} = await supabase().auth.signOut();
+
+  if(error) {
+    console.log(error)
+  }
+}

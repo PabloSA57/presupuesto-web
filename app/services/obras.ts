@@ -9,21 +9,32 @@ export class ObraService {
     }
 
     async getObras(id_user: string, query: string, currentPage: number ) {
-        const ITEMFORPAGE = 5
+        const ITEMFORPAGE = 7
         const fromaux =  (currentPage - 1) * (ITEMFORPAGE - 1)
         const from = currentPage > 1 ? fromaux + (currentPage - 1) : fromaux
         const to = from + (ITEMFORPAGE - 1)
 
+        const querybd = this.db.from("obras").select().eq('id_user', id_user)
+
+        if(query) {
+          querybd.ilike('name', `%${query}%`)
+        }
+
+        //const {data, error} = await this.db.from("obras").select().eq('id_user', id_user).range(from, to)
+        const {data: all_data} = await  querybd
+        console.log('count', all_data?.length)
+        const {data, error} = await querybd.range(from, to)
+
         
-
-        const {data, error} = await this.db.from("obras").select().eq('id_user', id_user).range(from, to)
-
-       
+        if(error){
+          console.log(error, 'error')
+          
+        }
         
         //const count = await this.db.from('obras').select()
       //  const count = this.db.rpc("hello_world")
        // console.log(count, 'count')
-        return {data,  error}
+        return {data,  error, total: all_data?.length}
     }
 
     

@@ -29,17 +29,17 @@ const Tabla = async ({
   const obraService = new ObraService(supabase);
   const { data: count_obras } = await supabase.rpc("count_obras");
 
-  const { data: obras } = await obraService.getObras(
+  const { data: obras, total } = await obraService.getObras(
     data.user?.id!,
     query,
     currentPage
   );
 
   return (
-    <section className=" p-2 md:p-3 bg-white rounded-lg mt-3">
+    <section className=" p-2 flex-1 max-w-screen-[100vw] flex flex-col md:p-3 bg-white rounded-lg mt-3">
       <div className=" w-full flex justify-between p-1 md:p-3">
         <div className="">
-          <h2 className=" font-semibold text-sm md:text-lg">Mis Obras</h2>
+          <h2 className=" font-semibold text-sm md:text-lg">Obras</h2>
           <p className=" text-xs md:text-sm font-thin text-neutral-600">
             Aqui veras tus obras
           </p>
@@ -66,7 +66,7 @@ const Tabla = async ({
                 Estado
               </th>
               <th className="w-[30%] p-2 md:p-3 text-start text-xs md:text-sm">
-                Progreso
+                Fecha
               </th>
               <th className="w-[30%] p-2 md:p-3 text-end text-xs md:text-sm">
                 Direccion
@@ -74,32 +74,37 @@ const Tabla = async ({
             </tr>
           </thead>
           <tbody className=" min-h-[200px]  ">
-            {obras?.map((d) => (
-              <tr className="border-b-2  border-b-neutral-200" key={d?.id}>
-                <td className="w-[30%] h-fit  p-2 md:p-3 text-start text-xs md:text-sm">
-                  <Link href={`/dashboard/obras/${d?.id}`}>{d?.name}</Link>
-                </td>
-                <td className="w-[20%] h-fit  p-2  md:p-3 text-start">
-                  <Statu statu={d?.state as Status} />
-                </td>
-                <td className="w-[20%] h-fit  p-2  md:p-3 text-start">
-                  <div className=" h-1 rounded-md w-full  bg-green-400">
-                    <span className=" md:text-xs text-neutral-500">100%</span>
-                  </div>
-                </td>
-                <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-thin text-neutral-700">
-                  {d?.direction}
-                </td>
-              </tr>
-            ))}
+            {obras?.map((d) => {
+              const date = new Date(d.created_at);
+              const date_string = date.toDateString();
+
+              return (
+                <tr className="border-b-2  border-b-neutral-200" key={d?.id}>
+                  <td className="w-[30%] h-fit  p-2 md:p-3 text-start text-xs md:text-sm">
+                    <Link href={`/dashboard/obras/${d?.id}`}>{d?.name}</Link>
+                  </td>
+                  <td className="w-[20%] h-fit  p-2  md:p-3 text-start">
+                    <Statu statu={d?.state as Status} />
+                  </td>
+                  <td className="w-[20%] h-fit  p-2  md:p-3 text-start">
+                    <span className=" text-xs text-neutral-500">
+                      {date_string}
+                    </span>
+                  </td>
+                  <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-thin text-neutral-700">
+                    {d?.direction}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
       {!isSign && (
         <Pagination
-          totalItems={count_obras!}
-          itemsForPage={5}
+          totalItems={total!}
+          itemsForPage={7}
           currentItmesCount={obras?.length!}
           currentPage={currentPage}
         />

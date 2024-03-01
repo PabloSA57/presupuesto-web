@@ -1,4 +1,7 @@
+import { createClient } from "@/app/utils/supabase/server";
+import { cookies } from "next/headers";
 import React from "react";
+import { GiProgression } from "react-icons/gi";
 import {
   MdIncompleteCircle,
   MdMonetizationOn,
@@ -9,16 +12,35 @@ const iconList = {
   completed: MdIncompleteCircle,
   pending: MdPending,
   total: MdMonetizationOn,
+  progress: GiProgression,
 };
 
-export default async function CardWrapper() {
+export default async function CardWrapper({ user_id }: { user_id: string }) {
+  const supabase = createClient(cookies());
+
+  const { data: obras } = await supabase
+    .from("obras")
+    .select()
+    .eq("id_user", user_id);
+
+  const total = obras?.length;
+  const started = obras?.filter((o) => o.state === "started").length;
+  const completed = obras?.filter((o) => o.state === "completed").length;
+  const progress =
+    started === 0 || completed === 0
+      ? 0
+      : ((100 * completed!) / started!).toFixed(2);
   return (
-    <>
-      <Card title="Completado" value={200} type="completed" />
-      <Card title="Pendiente" value={300} type="pending" />
-      <Card title="Total de Obra" value={5000} type="total" />
-      <Card title="Monto" value={5000} type="total" />
-    </>
+    <div className="grid gap-2 mt-2 md:gap-6 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+      <Card
+        title="Completado"
+        value={completed ? completed : 0}
+        type="completed"
+      />
+      <Card title="En proceso" value={started ? started : 0} type="pending" />
+      <Card title="Total de Obra" value={total ? total : 0} type="total" />
+      <Card title="Progreso" value={`%${progress}`} type="progress" />
+    </div>
   );
 }
 
@@ -29,7 +51,7 @@ export const Card = ({
 }: {
   title: string;
   value: number | string;
-  type: "completed" | "pending" | "total";
+  type: "completed" | "pending" | "total" | "progress";
 }) => {
   const Icon = iconList[type];
   return (
