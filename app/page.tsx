@@ -57,7 +57,7 @@ export default function Home() {
         </main>
       </div>
 
-      <footer className="  w-full py-3   flex justify-between px-1 sm:px-4 md:px-5  lg:px-20 xl:24">
+      <footer className="  w-full py-3 flex justify-center px-1 sm:px-4 md:px-5  lg:px-20 xl:24">
         <small className="text-neutral-200 text-center">Pablo Sierra</small>
       </footer>
     </div>

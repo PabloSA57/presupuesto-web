@@ -11,6 +11,7 @@ import {
 //import { PDFViewer } from "@react-pdf/renderer";
 
 import { BiDownload } from "react-icons/bi";
+import { FiLoader } from "react-icons/fi";
 
 const styles = StyleSheet.create({
   page: {
@@ -95,10 +96,15 @@ const MyDocument = ({ data }: { data: Budget }) => {
 
 const PdfCointainer = ({ data }: { data: Budget }) => {
   return (
-    <PDFDownloadLink document={<MyDocument data={data} />} fileName="test.pdf">
+    <PDFDownloadLink
+      document={<MyDocument data={data} />}
+      fileName="presupuesto.pdf"
+    >
       {({ blob, url, loading, error }) =>
         loading ? (
-          "Loading document..."
+          <span className="text-center text-sm animate-spin">
+            <FiLoader />
+          </span>
         ) : (
           <button className="  text-base ">
             <BiDownload />

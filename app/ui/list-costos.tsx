@@ -5,6 +5,7 @@ import { createClient } from "../utils/supabase/client";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { FiLoader } from "react-icons/fi";
+import { BiSearch } from "react-icons/bi";
 
 const categories = Array.from(new Set(list.map((l) => l.category)));
 
@@ -79,24 +80,29 @@ const ListCostos = ({ id_budget }: { id_budget: number }) => {
 
   return (
     <div className=" flex flex-col h-full max-h-[500px] w-full max-w-[600px] p-2 lg:p-3 rounded-xl bg-white m-1 ">
-      <header className=" mb-2 bg-neutral-800 py-1 rounded-md text-white">
+      <header className=" mb-2 bg-neutral-100 py-1 rounded-md text-neutral-950">
         <h5 className=" text-md font-semibold">Costo: Mano de obra</h5>
-        <p className=" text-sm font-thin">Febrero 2024</p>
+        <p className=" text-sm font-extralight text-red-400">Febrero 2024</p>
       </header>
 
-      <div className=" w-full flex flex-wrap gap-2 justify-between">
-        <input
-          type="text"
-          placeholder="Bucar producto"
-          className=" w-1/2 bg-transparent border-[1px] outline-none focus:border-gray-400 rounded-lg text-sm mt-2 font-thin py-1 px-2"
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className=" w-full  flex flex-wrap gap-2 justify-between">
+        <div className="py-2 px-4 w-full flex items-center bg-white border-[1px] border-neutral-300 focus:border-gray-400 rounded-lg">
+          <span className=" text-base">
+            <BiSearch />
+          </span>
+          <input
+            className="w-full max-w-[400px] ml-1 outline-none  text-sm font-light  placeholder:text-neutral-800"
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar Mano de obra"
+          />
+        </div>
 
         <select
           onChange={(e) => setFilter(e.target.value)}
           name=""
           id=""
-          className=" w-fit text-neutral-900 bg-transparent border-[1px] outline-none focus:border-gray-400 rounded-lg text-xs mt-2 font-thin py-1 px-2"
+          className=" w-full text-neutral-900 bg-transparent border-[1px] outline-none focus:border-gray-400 rounded-lg text-xs mt-2 font-light py-2 px-4"
         >
           {categories.map((c, index) => (
             <option className=" text-neutral-900" key={index}>
@@ -151,7 +157,7 @@ const ListCostos = ({ id_budget }: { id_budget: number }) => {
           </p>
         )}
       </div>
-      <div className="w-full p-2 flex items-center justify-between rounded-md bg-neutral-800">
+      <div className="w-full p-2 flex items-center justify-between rounded-md bg-neutral-700">
         <ul className="flex overflow-auto gap-1 flex-1 text-white">
           {selected?.map((d) => (
             <li key={d.name}>

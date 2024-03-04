@@ -1,5 +1,5 @@
 import Search from "@/app/ui/obras/search";
-import Tabla from "@/app/ui/tabla-obras";
+import Tabla from "@/app/ui/list-obras";
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";

@@ -49,11 +49,11 @@ export const Submit = ({
   return (
     <button
       disabled={pending || isDisabled}
-      className=" bg-red-500 hover:bg-red-600 px-3 py-2 text-sm font-semibold rounded-lg text-white disabled:bg-red-400 flex justify-center disabled:cursor-not-allowed"
+      className=" bg-red-500 min-h-9 mt-1  hover:bg-red-600 px-3 py-2 text-sm font-semibold rounded-lg text-white disabled:bg-red-400 flex justify-center items-center disabled:cursor-not-allowed"
       type="submit"
     >
       {pending ? (
-        <span className="text-center text-sm animate-spin">
+        <span className="text-center text-sm font-semibold animate-spin">
           <FiLoader />
         </span>
       ) : (

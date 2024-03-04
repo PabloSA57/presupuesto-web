@@ -37,6 +37,7 @@ const FormAuth = ({
           placeholder="pablo@gmail.com"
           style_input="text-neutral-50 bg-neutral-600 focus:border-gray-200"
           style_label=" text-neutral-300"
+          defaultValue={"testpresupuesto4@gmail.com"}
         />
         {type === "register" && (
           <WrapperInput
@@ -58,6 +59,7 @@ const FormAuth = ({
           placeholder="password"
           style_input="text-neutral-50 bg-neutral-600 focus:border-gray-200"
           style_label=" text-neutral-300"
+          defaultValue={"12345678"}
         />
 
         <Submit text={type === "login" ? "Iniciar sesion" : "Registrar"} />

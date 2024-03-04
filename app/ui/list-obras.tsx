@@ -8,8 +8,9 @@ import { cookies } from "next/headers";
 import { Status } from "../libs/definitions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import CardObra from "./obras/card-obra";
 
-const Tabla = async ({
+const ListObra = async ({
   isSign,
   query,
   currentPage,
@@ -46,8 +47,16 @@ const Tabla = async ({
           </div>
         </div>
       )}
+
+      <section className=" sm:hidden overflow-auto min-h-[150px] flex flex-col gap-2">
+        {obras?.map((p: any) => (
+          <Link href={`/dashboard/obras/${p?.id}`} key={p.id}>
+            <CardObra data={p} />
+          </Link>
+        ))}
+      </section>
       {!obras || obras?.length > 0 ? (
-        <div className=" overflow-auto min-h-[150px]">
+        <div className=" overflow-auto hidden sm:block min-h-[150px]">
           <table className="w-full min-w-[600px]">
             <thead className=" ">
               <tr className=" border-b-2 border-b-neutral-200">
@@ -88,7 +97,7 @@ const Tabla = async ({
                         {date_string}
                       </span>
                     </td>
-                    <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-thin text-neutral-700">
+                    <td className="w-[30%] h-fit p-2  md:p-3 text-end text-xs md:text-sm font-light text-neutral-700">
                       {d?.direction}
                     </td>
                   </tr>
@@ -125,4 +134,4 @@ const Tabla = async ({
   );
 };
 
-export default Tabla;
+export default ListObra;

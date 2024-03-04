@@ -2,6 +2,7 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { BiSearch } from "react-icons/bi";
 const Search = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -20,14 +21,19 @@ const Search = () => {
   }, 300);
 
   return (
-    <input
-      className="w-full max-w-[300px] bg-white border-[1px] outline-none focus:border-gray-400 rounded-lg text-sm mt-2 font-light py-2 px-2 placeholder:text-neutral-800"
-      type="text"
-      onChange={(e) => {
-        handleChange(e.target.value);
-      }}
-      placeholder="Buscar Obra"
-    />
+    <div className="py-2 px-4 flex items-center bg-white border-[1px] border-neutral-300 focus:border-gray-400 rounded-lg">
+      <span className=" text-base">
+        <BiSearch />
+      </span>
+      <input
+        className="w-full max-w-[400px] ml-1 outline-none  text-sm font-light  placeholder:text-neutral-800"
+        type="text"
+        onChange={(e) => {
+          handleChange(e.target.value);
+        }}
+        placeholder="Buscar Obra"
+      />
+    </div>
   );
 };
 

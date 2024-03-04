@@ -2,6 +2,7 @@ import React from "react";
 import FormTest from "../ui/form-test";
 //import MyDocument from "../ui/mydocument";
 import dynamic from "next/dynamic";
+import CardObra from "../ui/obras/card-obra";
 
 const MyDocument = dynamic(() => import("../ui/mydocument"), {
   loading: () => <p>Loading</p>,
@@ -67,7 +68,7 @@ const Page = () => {
   return (
     <main className=" h-screen w-screen">
       <h2>Test</h2>
-      <div style={{ width: "800px", height: "900px" }}></div>
+      <CardObra data={""} />
     </main>
   );
 };

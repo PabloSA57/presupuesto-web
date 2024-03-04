@@ -4,8 +4,10 @@ import { createClient } from "@/app/utils/supabase/server";
 import ListCostos from "@/app/ui/list-costos";
 import ButtonModal from "@/app/ui/obras/btn-modal";
 import BudgetList from "@/app/ui/obras/list-budget";
-import { ButtonBack } from "@/app/ui/button";
+
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { MdArrowBack } from "react-icons/md";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const supabase = createClient(cookies());
@@ -29,7 +31,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
   return (
     <main className="flex bg-neutral-100 h-full overflow-auto md:min-h-full md:rounded-xl p-1 md:p-3">
       <div className="flex-1 flex flex-col">
-        <ButtonBack />
+        <Link
+          className="text-lg w-fit h-fit p-1"
+          href={`/dashboard/obras/${params.id}`}
+        >
+          <MdArrowBack />
+        </Link>
 
         <div className=" flex flex-col w-full  p-2 rounded-md border-b-[1px] border-neutral-400 ">
           <div className="flex justify-between w-full">
@@ -48,11 +55,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
             </ButtonModal>
           </div>
 
-          {budget?.total && (
-            <p className=" text-base font-semibold  text-center text-red-500">
-              ${budget?.total}
-            </p>
-          )}
+          <p className=" text-base font-semibold  text-center text-red-500">
+            {budget?.total ? `$${budget?.total}` : "$0"}
+          </p>
         </div>
 
         {budget?.budget_job.length! > 0 ? (

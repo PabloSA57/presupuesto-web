@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 import Hero from "@/app/ui/dashboard/hero";
 import CardWrapper from "../ui/dashboard/card";
-import Tabla from "@/app/ui/tabla-obras";
+import Tabla from "@/app/ui/list-obras";
 import { ObrasTableSkeleton } from "../ui/skeletons";
 
 export const revalidate = 0;

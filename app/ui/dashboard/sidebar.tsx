@@ -32,16 +32,16 @@ const SideBar = () => {
         <ul className=" flex justify-between md:flex-col gap-4   ">
           {links.map((l) => (
             <li key={l.name}>
-              <Link href={l.href} className="flex items-center gap-1 text-sm ">
+              <Link href={l.href} className="flex items-center gap-1 ">
                 <div
                   className={clsx(
-                    "  p-2 rounded-lg text-white",
+                    "  p-2 rounded-lg text-white text-base ",
                     pathname === l.href ? "bg-red-600" : "bg-neutral-800"
                   )}
                 >
                   {l.icon}
                 </div>
-                <span className=" hidden lg:block text-neutral-400">
+                <span className=" hidden lg:block text-sm text-neutral-400">
                   {l.name}
                 </span>
               </Link>
