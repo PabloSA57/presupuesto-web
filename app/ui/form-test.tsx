@@ -3,7 +3,7 @@ import React from "react";
 import { useFormState } from "react-dom";
 import { createInvoice } from "../libs/actions";
 import Link from "next/link";
-import Input from "./input";
+import { WrapperInput } from "./input";
 import { Submit } from "./button";
 
 const FormTest = () => {
@@ -18,7 +18,20 @@ const FormTest = () => {
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
-          <Input type="text" name="name" label="Nombre" defaultValue="" />
+          <WrapperInput
+            type="text"
+            name="name"
+            label="Nombre"
+            defaultValue=""
+          />
+          <WrapperInput
+            type="password"
+            name="password"
+            label="Password"
+            defaultValue=""
+            placeholder="Password"
+            style_input=" "
+          />
           <div id="customer-error" aria-live="polite" aria-atomic="true">
             {state?.errors?.name &&
               state?.errors?.name.map((error: string) => (

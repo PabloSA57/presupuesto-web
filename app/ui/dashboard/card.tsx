@@ -31,7 +31,7 @@ export default async function CardWrapper({ user_id }: { user_id: string }) {
       ? 0
       : ((100 * completed!) / started!).toFixed(2);
   return (
-    <div className="grid gap-2 mt-2 md:gap-6 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-2 lg:py-4 md:gap-6 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
       <Card
         title="Completado"
         value={completed ? completed : 0}

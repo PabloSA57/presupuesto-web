@@ -1,11 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 const Modal = ({
   children,
@@ -23,7 +18,6 @@ const Modal = ({
   const onDismiss = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (type === "client" && onClose) {
-        console.log("aqui");
         onClose(e);
         return;
       }
@@ -36,7 +30,7 @@ const Modal = ({
     overlay.current || wrapper.current
       ? document.body.classList.add("modal-active")
       : document.body.classList.remove("modal-active");
-    console.log("modal");
+
     return () => document.body.classList.remove("modal-active");
   }, [overlay.current || wrapper.current]);
 

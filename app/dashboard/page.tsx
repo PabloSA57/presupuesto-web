@@ -1,12 +1,13 @@
 import React, { Suspense } from "react";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { createClient } from "../utils/supabase/server";
+import { redirect } from "next/navigation";
 
 import Hero from "@/app/ui/dashboard/hero";
 import CardWrapper from "../ui/dashboard/card";
 import Tabla from "@/app/ui/tabla-obras";
+import { ObrasTableSkeleton } from "../ui/skeletons";
 
 export const revalidate = 0;
 
@@ -17,18 +18,24 @@ const Page = async () => {
     data: { user },
     error,
   } = await supabase.auth.getUser();
-  //console.log(data.user, "data");
-  /*if (error || !data?.user) {
-    redirect("/");
-  }*/
+
+  if (error || !user) {
+    redirect("/login");
+  }
 
   return (
-    <main className="bg-neutral-100 min-h-screen md:min-h-full md:rounded-xl p-1 md:p-3">
-      <Hero full_name={user?.user_metadata.full_name} />
+    <main className="flex flex-col bg-neutral-100 h-full overflow-x-hidden md:min-h-full md:rounded-xl p-1 md:p-3">
+      <div className="flex flex-col flex-1">
+        <Suspense fallback>
+          <Hero full_name={user?.user_metadata.full_name} />
+        </Suspense>
 
-      <CardWrapper user_id={user?.id!} />
+        <CardWrapper user_id={user?.id!} />
 
-      <Tabla isSign={true} query="" currentPage={1} />
+        <Suspense fallback={<ObrasTableSkeleton />}>
+          <Tabla isSign={true} query="" currentPage={1} />
+        </Suspense>
+      </div>
     </main>
   );
 };

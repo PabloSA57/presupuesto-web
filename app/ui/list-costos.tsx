@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import list from "@/app/libs/costo/Enero24.json";
+import list from "@/app/libs/costo/Febrero24.json";
 import { createClient } from "../utils/supabase/client";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -59,7 +59,7 @@ const ListCostos = ({ id_budget }: { id_budget: number }) => {
       };
     });
     const { error } = await supabase.from("budget_job").insert(new_data);
-
+    console.log(error);
     if (!error) {
       router.refresh();
       setBudgetJob((prev) =>
@@ -71,16 +71,17 @@ const ListCostos = ({ id_budget }: { id_budget: number }) => {
       setTimeout(() => {
         setStatus("typing");
       }, 3000);
+      return;
     }
 
     setStatus("error");
   };
 
   return (
-    <div className=" flex flex-col h-full max-h-[500px] w-full max-w-[600px] p-2 rounded-lg bg-white m-1 ">
+    <div className=" flex flex-col h-full max-h-[500px] w-full max-w-[600px] p-2 lg:p-3 rounded-xl bg-white m-1 ">
       <header className=" mb-2 bg-neutral-800 py-1 rounded-md text-white">
-        <h5 className=" text-md font-semibold">Lista de costo</h5>
-        <p className=" text-sm font-thin">Marzo 2025</p>
+        <h5 className=" text-md font-semibold">Costo: Mano de obra</h5>
+        <p className=" text-sm font-thin">Febrero 2024</p>
       </header>
 
       <div className=" w-full flex flex-wrap gap-2 justify-between">
@@ -164,6 +165,11 @@ const ListCostos = ({ id_budget }: { id_budget: number }) => {
         {status === "success" && (
           <p className=" text-xs   text-green-400">
             Se añadieron correctamente
+          </p>
+        )}
+        {status === "error" && (
+          <p className=" text-xs   text-red-400">
+            Error al añadir este elemento.
           </p>
         )}
 

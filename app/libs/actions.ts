@@ -108,7 +108,6 @@ export async function createOrUpdateObra(prevState: State ,formData: FormData, t
     const validatedFields = CreateObra.safeParse( {
         name: formData.get('name') ? formData.get('name') : null, 
         direction: formData.get('direction') ? formData.get('direction') : null, 
-        file: formData.get('file'),
         start_date: formData.get('start_date') ,
         end_date: formData.get('end_date'),
         state: formData.get('state')
@@ -238,4 +237,6 @@ export async function signOut() {
   if(error) {
     console.log(error)
   }
+
+  redirect("/")
 }

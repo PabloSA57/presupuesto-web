@@ -1,51 +1,65 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 interface InputProp {
-  name: string;
-  type: string;
+  name?: string;
+  type?: string;
   placeholder?: string;
-  label: string;
+  label?: string;
   required?: boolean;
   readonly?: boolean;
   defaultValue?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
+  style_input?: string;
+  style_label?: string;
 }
-const Input = ({
-  name,
-  type,
-  placeholder,
-  label,
-  required = false,
-  readonly = false,
-  defaultValue,
-  onChange = () => null,
-  value,
-}: InputProp) => {
-  const more_data = value ? { value: value } : {};
+
+export const CustomInput = (props: any) => {
+  const [show, setShow] = useState(false);
+  const { style, type, ...rest } = props;
+
+  return (
+    <div className="w-full flex relative ">
+      <input
+        {...rest}
+        type={show ? "text" : type}
+        className={
+          "w-full border-[1px] outline-none rounded-lg text-sm mt-2 font-light py-2 px-2 " +
+          style
+        }
+      />
+
+      {type === "password" ? (
+        <button
+          className=" absolute right-2 top-5 text-sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setShow(!show);
+          }}
+        >
+          {show ? <FaRegEye /> : <FaRegEyeSlash />}
+        </button>
+      ) : null}
+    </div>
+  );
+};
+export const WrapperInput = (props: InputProp) => {
+  const { label, style_input, style_label, ...rest } = props;
+  //const more_data = value ? { value: value } : {};
   return (
     <div className="flex flex-col items-start">
-      {type !== "hidden" && (
+      {props.type !== "hidden" && (
         <label
-          htmlFor={name}
-          className="text-xs font-semibold text-start text-neutral-800"
+          htmlFor={props.name}
+          className={"text-xs font-light text-start" + style_label}
         >
           {label}
         </label>
       )}
-      <input
-        {...more_data}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        required={required}
-        readOnly={readonly}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        className=" w-full bg-transparent border-[1px] outline-none focus:border-gray-400 rounded-lg text-sm mt-2 font-light py-2 px-2 "
-      />
+      <CustomInput {...rest} style={style_input} />
     </div>
   );
 };
-
-export default Input;

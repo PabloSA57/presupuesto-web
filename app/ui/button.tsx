@@ -10,8 +10,17 @@ import Link from "next/link";
 
 export const ButtonBack = () => {
   const router = useRouter();
+
   return (
-    <button className=" text-lg w-fit h-fit p-1" onClick={() => router.back()}>
+    <button
+      className=" text-lg w-fit h-fit p-1"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        router.back();
+      }}
+    >
       <MdArrowBack />
     </button>
   );
@@ -37,15 +46,14 @@ export const Submit = ({
 }) => {
   const { pending } = useFormStatus();
 
-  console.log(pending);
   return (
     <button
       disabled={pending || isDisabled}
-      className=" bg-red-600 px-3 py-2 text-xs font-semibold rounded-lg text-white disabled:bg-red-400 flex justify-center disabled:cursor-not-allowed"
+      className=" bg-red-500 hover:bg-red-600 px-3 py-2 text-sm font-semibold rounded-lg text-white disabled:bg-red-400 flex justify-center disabled:cursor-not-allowed"
       type="submit"
     >
       {pending ? (
-        <span className="text-center animate-spin">
+        <span className="text-center text-sm animate-spin">
           <FiLoader />
         </span>
       ) : (

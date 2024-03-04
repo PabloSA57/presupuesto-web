@@ -1,17 +1,23 @@
 import { cookies } from "next/headers";
 
 import { createClient } from "@/app/utils/supabase/server";
-
-import { BiDownload } from "react-icons/bi";
-
 import ListCostos from "@/app/ui/list-costos";
 import ButtonModal from "@/app/ui/obras/btn-modal";
 import BudgetList from "@/app/ui/obras/list-budget";
-import Link from "next/link";
 import { ButtonBack } from "@/app/ui/button";
+import { redirect } from "next/navigation";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const supabase = createClient(cookies());
+
+  const {
+    data: { user },
+    error: errorAuth,
+  } = await supabase.auth.getUser();
+
+  if (errorAuth || !user) {
+    redirect("/");
+  }
 
   const { data: budget, error } = await supabase
     .from("budget")
@@ -34,15 +40,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
               </p>
             </div>
 
-            <div className=" flex gap-2 items-center">
-              <ButtonModal
-                style="px-2 py-1 bg-red-500 text-white text-sm rounded-md font-semibold"
-                content="Añadir"
-              >
-                <ListCostos id_budget={budget?.id!} />
-              </ButtonModal>
-              <BiDownload />
-            </div>
+            <ButtonModal
+              style="px-2 py-1 h-fit bg-red-400 hover:bg-red-500 text-white text-sm rounded-md font-semibold"
+              content="Añadir"
+            >
+              <ListCostos id_budget={budget?.id!} />
+            </ButtonModal>
           </div>
 
           {budget?.total && (

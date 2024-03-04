@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Input from "../input";
+import { WrapperInput } from "../input";
 import { useFormState } from "react-dom";
 import { createOrUpdateObra } from "@/app/libs/actions";
 import { Submit } from "../button";
@@ -12,10 +12,12 @@ const FormCreate = () => {
     initialState
   );
 
+  console.log(state, "error");
+
   return (
     <form action={formAction} className="flex flex-col gap-3 w-full">
       <div className="mb-4 relative">
-        <Input
+        <WrapperInput
           type="text"
           name="name"
           placeholder="Nombre de la Obra"
@@ -36,10 +38,10 @@ const FormCreate = () => {
             ))}
         </div>
       </div>
-      <input type="hidden" value="uninitiated" name="status" />
+      <input type="hidden" value="uninitiated" name="state" />
 
       <div className="mb-4 relative">
-        <Input
+        <WrapperInput
           type="text"
           name="direction"
           placeholder="Direccion"
@@ -57,12 +59,15 @@ const FormCreate = () => {
 
       {/* <ImageLoad /> */}
 
-      <Input type="date" name="start_date" label="Fecha de inicio" />
-      <Input type="date" name="end_date" label="Fecha de fin" />
+      <WrapperInput type="date" name="start_date" label="Fecha de inicio" />
+      <WrapperInput type="date" name="end_date" label="Fecha de fin" />
       {state?.message && (
         <p className=" text-xs text-neutral-500 font-thin">{state.message}</p>
       )}
-      <Submit text="Crear" />
+
+      <div className="flex w-full justify-end">
+        <Submit text="Crear" />
+      </div>
     </form>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import Modal from "@/app/ui/modal";
 import FormCreate from "@/app/ui/obras/form-create";
 import React from "react";

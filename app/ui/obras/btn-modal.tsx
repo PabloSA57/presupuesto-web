@@ -8,7 +8,7 @@ const ButtonModal = ({
   content,
 }: {
   children: React.ReactNode;
-  style: string;
+  style?: string;
   content: any;
 }) => {
   const [modal, setModal] = useState(false);

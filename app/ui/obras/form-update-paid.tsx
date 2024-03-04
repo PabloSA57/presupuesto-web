@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
-import Input from "../input";
+import { WrapperInput } from "../input";
 import { upadteCharged } from "@/app/libs/actions";
 import { Submit } from "../button";
 
@@ -40,7 +40,7 @@ const FormUpdatePaid = ({
         action={formAction}
         className="flex flex-col gap-3 w-full"
       >
-        <Input
+        <WrapperInput
           label="Cobrado"
           name="initial"
           type="number"
@@ -48,7 +48,7 @@ const FormUpdatePaid = ({
           value={initial_charged}
           readonly
         />
-        <Input
+        <WrapperInput
           label="Cobrado Ahora"
           name="charged_now"
           type="number"
@@ -56,7 +56,7 @@ const FormUpdatePaid = ({
           value={chargedNow}
           onChange={(e) => setChargedNow(Number(e.target.value))}
         />
-        <Input
+        <WrapperInput
           label="Cobrado Ahora"
           name="charged"
           type="hidden"

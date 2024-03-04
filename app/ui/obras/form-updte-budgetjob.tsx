@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Input from "../input";
+import { WrapperInput } from "../input";
 import { useFormState } from "react-dom";
 import { upadteJob } from "@/app/libs/actions";
 import { Submit } from "../button";
@@ -31,18 +31,17 @@ const FormUpdateJob = ({
     }
   );
 
-  console.log(meter, state);
   return (
     <div className="bg-white rounded-md p-3 w-full m-2 max-w-[400px]">
       <form action={formAction} className="flex flex-col gap-3 w-full">
-        <Input
+        <WrapperInput
           label="Nombre"
           name="name"
           type="text"
           defaultValue={budget_job?.name!}
           readonly
         />
-        <Input
+        <WrapperInput
           label="Precio"
           name="price"
           type="text"
@@ -50,7 +49,7 @@ const FormUpdateJob = ({
           readonly
         />
 
-        <Input
+        <WrapperInput
           type="number"
           name="meter"
           label={budget_job.measurement!}
