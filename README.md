@@ -13,3 +13,5 @@ Este proyecto te ayuda a crear y gestionar presupuestos para tus proyectos de co
 - Informes: El proyecto genera informes detallados que te ayudan a visualizar tu presupuesto y tomar decisiones informadas.
 
 [Presupuesto](https://presupuesto-web-one.vercel.app/)
+![hero-desk](https://github.com/PabloSA57/presupuesto-web/assets/97354827/e57b4b90-0ab3-4711-97fc-b06659d6e575)
+![hero-phone](https://github.com/PabloSA57/presupuesto-web/assets/97354827/85b6422a-eb27-41a7-a22e-d625a08dae62)
