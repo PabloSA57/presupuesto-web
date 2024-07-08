@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { login, signup } from "../actions";
 import { WrapperInput } from "@/app/ui/input";
 import { Submit } from "@/app/ui/button";
 import { useFormState } from "react-dom";
@@ -17,12 +16,12 @@ const FormAuth = ({
   const [state, formAction] = useFormState(action, initialState);
 
   return (
-    <div className="p-2  md:p-4  w-full max-w-[450px] rounded-md">
+    <div className="p-2  md:p-4 bg-white shadow-lg  w-full max-w-[450px] rounded-md">
       <div className=" flex flex-col mb-10">
-        <h1 className=" text-2xl text-neutral-50 font-semibold">
+        <h1 className=" text-2xl text-neutral-950 font-semibold">
           {type === "login" ? "Bienvenido de nuevo" : "Comienza"}
         </h1>
-        <p className="text-sm font-light text-neutral-300">
+        <p className="text-sm font-medium text-neutral-600">
           {type === "login"
             ? "Inicia sesion en tu cuenta"
             : "Crea una nueva cuenta"}
@@ -35,8 +34,8 @@ const FormAuth = ({
           label="Email"
           required
           placeholder="pablo@gmail.com"
-          style_input="text-neutral-50 bg-neutral-600 focus:border-gray-200"
-          style_label=" text-neutral-300"
+          style_input="text-neutral-900 bg-neutral-white focus:border-gray-200"
+          style_label=" text-neutral-800"
           defaultValue={"testpresupuesto4@gmail.com"}
         />
         {type === "register" && (
@@ -46,8 +45,8 @@ const FormAuth = ({
             label="Nombre completo"
             required
             placeholder="Angel Sierra"
-            style_input="text-neutral-50 bg-neutral-600 focus:border-gray-200"
-            style_label=" text-neutral-300"
+            style_input="text-neutral-900 bg-neutral-white focus:border-gray-200"
+            style_label=" text-neutral-800"
           />
         )}
 
@@ -57,8 +56,8 @@ const FormAuth = ({
           label="Contraseña"
           required
           placeholder="password"
-          style_input="text-neutral-50 bg-neutral-600 focus:border-gray-200"
-          style_label=" text-neutral-300"
+          style_input="text-neutral-900 bg-neutral-white focus:border-gray-200"
+          style_label=" text-neutral-800"
           defaultValue={"12345678"}
         />
 
