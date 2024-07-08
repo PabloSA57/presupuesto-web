@@ -1,6 +1,6 @@
 "use client"
 import { CustomInput }from "@/app/ui/input"
-import Button from "../ui/Button"
+import { Button } from "@/app/ui/button"
 
 const Contact = () => {
     return (

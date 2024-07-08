@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import Button from "../ui/Button"
+import { Button } from "@/app/ui/button"
 
 /* <img src="/bg-hero.svg" alt="background hero" className="w-full z-0 absolute md:hidden translate-y-[-75px]" />
             <img src="/bg-hero.svg" alt="background hero" className="w-full z-0 absolute md:hidden transform   rotate-180 translate-y-[75px]" />

@@ -5,7 +5,7 @@ import { BiMenu } from "react-icons/bi"
 import { useState } from "react"
 import { MdClose } from "react-icons/md";
 import{ Logo } from "@/app/ui/icons/Logo"
-import Button from "../ui/Button"
+import { Button } from "@/app/ui/button"
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <header className="w-full  py-3 pt-5 text-white  flex justify-between items-center px-3 md:col-span-full md:px-10 md:px-10 lg:px-20 xl:px-24">
           <Logo />
-          <nav className="d-hidden md:d-flex">
+          <nav className="hidden md:flex">
             <ul className="text-center flex gap-4 items-center">
               <li className="text-neutral-700 hover:text-red-500" onClick={() => setMenu(false)}><Link href={"/#services"}>Servicios</Link></li>
               <li className="text-neutral-700 hover:text-red-500" onClick={() => setMenu(false)}><Link href={"/#contact"}>Contacto</Link></li>
@@ -33,8 +33,8 @@ const Header = () => {
           </header>
           <nav className="w-full">
             <ul className="text-center w-full flex flex-col items-center">
-              <li className="py-3 border-b w-full border-t border-neutral-500" onClick={() => setMenu(false)}><Link href={"/#services"}>Servicios</Link></li>
-              <li className="py-3 border-b w-full border-neutral-500" onClick={() => setMenu(false)}><Link href={"/#contact"}>Contacto</Link></li>
+              <li className="py-3 border-b w-full border-t border-neutral-500" ><Link onClick={() => setMenu(false)} href={"/#services"}>Servicios</Link></li>
+              <li className="py-3 border-b w-full border-neutral-500"><Link onClick={() => setMenu(false)} href={"/#contact"}>Contacto</Link></li>
               <li className="py-3 "><Link href={"/login"}><Button>LOGIN</Button></Link></li>
             </ul>  
           </nav> 

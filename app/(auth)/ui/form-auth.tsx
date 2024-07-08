@@ -16,7 +16,7 @@ const FormAuth = ({
   const [state, formAction] = useFormState(action, initialState);
 
   return (
-    <div className="p-2  md:p-4 bg-white shadow-lg  w-full max-w-[450px] rounded-md">
+    <div className="p-2 mx-3  md:p-4 bg-white shadow-lg  w-full max-w-[450px] rounded-md">
       <div className=" flex flex-col mb-10">
         <h1 className=" text-2xl text-neutral-950 font-semibold">
           {type === "login" ? "Bienvenido de nuevo" : "Comienza"}

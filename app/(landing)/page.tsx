@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { BiBarChartSquare, BiSpreadsheet } from "react-icons/bi";
-import { TbShovel } from "react-icons/tb";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Services from "./components/Services";

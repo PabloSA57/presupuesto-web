@@ -8,6 +8,32 @@ import { MdArrowBack, MdDelete } from "react-icons/md";
 import { deleteJob } from "../libs/actions";
 import Link from "next/link";
 
+
+interface Props {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'tertiary',
+  className?: string,
+  type?: "submit" | "button",
+  disabled?: boolean,
+}
+
+const StyleButtonVariant = {
+  primary: "bg-red-500 border border-red-500  text-white hover:bg-white hover:text-red-500  disabled:bg-red-400",
+  secondary: "bg-neutral-950 border border-neutral-950 text-white",
+  tertiary: "bg-white border border-white text-neutral-950 shadow-md",
+}
+
+export const Button = ({ children, variant="primary", className="", ...props }: Props) => {
+
+  const classes = StyleButtonVariant[variant]
+
+  return (
+      <button {...props} className={`text-sm font-medium h-[40px] ${classes} ${className}  px-3 grid place-content-center md:px-3 lg:font-semibold rounded-md disabled:cursor-not-allowed`}>
+          {children}
+      </button>
+  )
+}
+
 export const ButtonBack = () => {
   const router = useRouter();
 
@@ -47,9 +73,8 @@ export const Submit = ({
   const { pending } = useFormStatus();
 
   return (
-    <button
+    <Button
       disabled={pending || isDisabled}
-      className=" bg-red-500 min-h-9 mt-1  hover:bg-red-600 px-3 py-2 text-sm font-semibold rounded-lg text-white disabled:bg-red-400 flex justify-center items-center disabled:cursor-not-allowed"
       type="submit"
     >
       {pending ? (
@@ -59,7 +84,7 @@ export const Submit = ({
       ) : (
         text
       )}
-    </button>
+    </Button>
   );
 };
 
