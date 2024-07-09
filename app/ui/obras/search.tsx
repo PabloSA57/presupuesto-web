@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
-import { BiSearch } from "react-icons/bi";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {useDebouncedCallback} from "use-debounce";
+import {BiSearch} from "react-icons/bi";
 const Search = () => {
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const {replace} = useRouter();
   const pathname = usePathname();
 
   const handleChange = useDebouncedCallback((value: string) => {
@@ -21,7 +21,7 @@ const Search = () => {
   }, 300);
 
   return (
-    <div className="py-2 px-4 flex items-center bg-white border-[1px] border-neutral-300 focus:border-gray-400 rounded-lg">
+    <div className="w-full max-w-[400px] py-2 px-4 flex items-center bg-white border-[1px] border-neutral-300 focus:border-gray-400 rounded-lg">
       <span className=" text-base">
         <BiSearch />
       </span>

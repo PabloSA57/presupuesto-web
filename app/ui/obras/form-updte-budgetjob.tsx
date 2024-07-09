@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import { WrapperInput } from "../input";
-import { useFormState } from "react-dom";
-import { upadteJob } from "@/app/libs/actions";
-import { Submit } from "../button";
+import React, {useState} from "react";
+import {WrapperInput} from "../input";
+import {useFormState} from "react-dom";
+import {upadteJob} from "@/app/libs/actions";
+import {Submit} from "../button";
 
 type Jobs = {
   created_at: string;
@@ -32,7 +32,8 @@ const FormUpdateJob = ({
   );
 
   return (
-    <div className="bg-white rounded-md p-3 w-full m-2 max-w-[400px]">
+    <div className="bg-white rounded-md p-4 w-full m-2 max-w-[400px]">
+      <span className="text-lg font-semibold">Actualizar</span>
       <form action={formAction} className="flex flex-col gap-3 w-full">
         <WrapperInput
           label="Nombre"

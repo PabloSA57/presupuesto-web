@@ -19,10 +19,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       spacing: {
-        mobilemain: 'calc(100vh - 48px)'
+        mobilemain: 'calc(100vh - 74px)'
       },
       minHeight: {
-        mobilemain: 'calc(100vh - 48px)'
+        mobilemain: 'calc(100vh - 74px)'
       },
       animation: {
         'slideIn': 'slidein .3s linear forwards',

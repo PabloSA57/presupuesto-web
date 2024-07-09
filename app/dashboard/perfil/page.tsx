@@ -1,7 +1,8 @@
 "use server";
-import { signOut } from "@/app/libs/actions";
-import { createClient } from "@/app/utils/supabase/server";
-import { cookies } from "next/headers";
+import {signOut} from "@/app/libs/actions";
+import {Button} from "@/app/ui/button";
+import {createClient} from "@/app/utils/supabase/server";
+import {cookies} from "next/headers";
 import Image from "next/image";
 import React from "react";
 
@@ -9,7 +10,7 @@ const PagePerfil = async () => {
   const supabase = createClient(cookies());
 
   const {
-    data: { user },
+    data: {user},
   } = await supabase.auth.getUser();
 
   return (
@@ -30,12 +31,9 @@ const PagePerfil = async () => {
 
         <div className="flex justify-center">
           <form action={signOut}>
-            <button
-              type="submit"
-              className=" text-sm text-red-500 hover:bg-neutral-200 border-[1px] border-red-400 rounded-lg font-normal p-2 w-full max-w-[200px]"
-            >
+            <Button type="submit" variant="outline">
               Cerrar Sesion
-            </button>
+            </Button>
           </form>
         </div>
       </section>

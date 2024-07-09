@@ -1,19 +1,21 @@
-import { cookies } from "next/headers";
+import {cookies} from "next/headers";
 
-import { createClient } from "@/app/utils/supabase/server";
+import {createClient} from "@/app/utils/supabase/server";
 import ListCostos from "@/app/ui/list-costos";
 import ButtonModal from "@/app/ui/obras/btn-modal";
 import BudgetList from "@/app/ui/obras/list-budget";
 
-import { redirect } from "next/navigation";
+import {redirect} from "next/navigation";
 import Link from "next/link";
-import { MdArrowBack } from "react-icons/md";
+import {MdArrowBack} from "react-icons/md";
+import {Suspense} from "react";
+import {BudgetJobSkeleton} from "@/app/ui/skeletons";
 
-const Page = async ({ params }: { params: { id: string } }) => {
+const Page = async ({params}: {params: {id: string}}) => {
   const supabase = createClient(cookies());
 
   const {
-    data: { user },
+    data: {user},
     error: errorAuth,
   } = await supabase.auth.getUser();
 
@@ -21,18 +23,18 @@ const Page = async ({ params }: { params: { id: string } }) => {
     redirect("/");
   }
 
-  const { data: budget, error } = await supabase
+  const {data: budget} = await supabase
     .from("budget")
     .select("*, budget_job(*)")
     .eq("id_obra", params.id)
-    .order("meter", { referencedTable: "budget_job", ascending: false })
+    .order("meter", {referencedTable: "budget_job", ascending: false})
     .single();
 
   return (
     <main className="flex bg-neutral-100 h-full overflow-auto md:min-h-full md:rounded-xl p-1 md:p-3">
       <div className="flex-1 flex flex-col">
         <Link
-          className="text-lg w-fit h-fit p-1"
+          className="text-xl w-fit h-fit p-1 rounded-full hover:bg-neutral-300"
           href={`/dashboard/obras/${params.id}`}
         >
           <MdArrowBack />
@@ -48,7 +50,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
             </div>
 
             <ButtonModal
-              style="px-2 py-1 h-fit bg-red-400 hover:bg-red-500 text-white text-sm rounded-md font-semibold"
+              style="bg-red-500 border border-red-500  text-white hover:bg-white hover:text-red-500  disabled:bg-red-400 text-sm font-medium h-[35px] px-3 grid place-content-center md:px-3 lg:font-semibold rounded-md"
               content="Añadir"
             >
               <ListCostos id_budget={budget?.id!} />
@@ -60,17 +62,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
           </p>
         </div>
 
-        {budget?.budget_job.length! > 0 ? (
-          <BudgetList
-            budget_job={budget?.budget_job}
-            id_obra={params.id}
-            is_edit
-          />
-        ) : (
-          <p className=" text-sm mt-2 font-normal text-center text-neutral-700">
-            Agregue trabajos a la lista
-          </p>
-        )}
+        <Suspense fallback={<BudgetJobSkeleton is_edit />}>
+          <BudgetList id_obra={params.id} is_edit />
+        </Suspense>
       </div>
     </main>
   );

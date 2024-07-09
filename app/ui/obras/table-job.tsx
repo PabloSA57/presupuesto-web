@@ -1,8 +1,8 @@
 import React from "react";
 import ButtonModal from "./btn-modal";
-import { BiEdit } from "react-icons/bi";
+import {BiEdit} from "react-icons/bi";
 import FormUpdateJob from "./form-updte-budgetjob";
-import { DeleteJob } from "../button";
+import {DeleteJob} from "../button";
 
 const TableJob = ({
   budget_job,
@@ -36,7 +36,7 @@ const TableJob = ({
             {is_edit && (
               <td className="p-2 flex justify-end">
                 <ButtonModal
-                  style="border-none p-1 w-fit h-fit text-lg"
+                  style="border-none p-1 w-fit h-fit text-lg rounded-full hover:bg-neutral-300"
                   content={<BiEdit />}
                 >
                   <FormUpdateJob budget_job={l} id_obra={id_obra} />

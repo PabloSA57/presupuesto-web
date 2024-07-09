@@ -1,21 +1,23 @@
-import React, { Suspense } from "react";
-import { cookies } from "next/headers";
+import React, {Suspense} from "react";
+import {cookies} from "next/headers";
 import Link from "next/link";
 
-import { createClient } from "@/app/utils/supabase/server";
+import {createClient} from "@/app/utils/supabase/server";
 
 import HeroObra from "@/app/ui/obras/hero";
 import BudgetList from "@/app/ui/obras/list-budget";
 import PaymentStatistics from "@/app/ui/obras/payment-statistics";
-import { redirect } from "next/navigation";
+import {redirect} from "next/navigation";
 
 import PdfCointainer from "@/app/ui/mydocument";
+import {Button} from "@/app/ui/button";
+import {BudgetJobSkeleton} from "@/app/ui/skeletons";
 
-const Page = async ({ params }: { params: { id: string } }) => {
+const Page = async ({params}: {params: {id: string}}) => {
   const supabase = createClient(cookies());
 
   const {
-    data: { user },
+    data: {user},
     error: errorAuth,
   } = await supabase.auth.getUser();
 
@@ -23,12 +25,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
     redirect("/");
   }
 
-  const { data: budget, error } = await supabase
+  const {data: budget, error} = await supabase
     .from("budget")
     .select("*, budget_job(*)")
     .eq("id_obra", params.id)
     .gt("budget_job.meter", 0)
-    .order("meter", { referencedTable: "budget_job", ascending: false })
+    .order("meter", {referencedTable: "budget_job", ascending: false})
     .single();
 
   if (error) {
@@ -39,15 +41,22 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <div className="flex gap-5 flex-col flex-1">
         <section className="w-full flex flex-col   md:min-h-[200px] gap-5 md:flex-row">
           <div className=" w-full md:w-1/2 min-h-[100px] ">
-            <HeroObra obra_id={params.id} />
+            <Suspense
+              fallback={
+                <section className="w-full h-full bg-gray-200 rounded-lg animate-pulse"></section>
+              }
+            >
+              <HeroObra obra_id={params.id} />
+            </Suspense>
           </div>
           <div className=" w-full md:w-1/2 min-h-[100px] ">
-            <PaymentStatistics
-              total={budget?.total!}
-              charged={budget?.charged!}
-              id_budget={budget?.id!}
-              id_obra={params.id}
-            />
+            <Suspense
+              fallback={
+                <section className="w-full h-full bg-gray-200 rounded-lg animate-pulse"></section>
+              }
+            >
+              <PaymentStatistics id_obra={params.id} />
+            </Suspense>
           </div>
         </section>
 
@@ -57,11 +66,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
               <h3 className=" font-semibold">Presupuesto</h3>
 
               <div className="flex gap-2 items-center">
-                <Link
-                  className=" bg-red-400 hover:bg-red-500 rounded-md text-sm font-semibold px-2 py-1 text-white"
-                  href={`/dashboard/obras/${params.id}/presupuesto`}
-                >
-                  Editar
+                <Link href={`/dashboard/obras/${params.id}/presupuesto`}>
+                  <Button className="h-[35px]">Editar</Button>
                 </Link>
 
                 <PdfCointainer
@@ -77,17 +83,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 />
               </div>
             </header>
-            <Suspense fallback={<div>Loading</div>}>
-              {budget?.budget_job.length! > 0 ? (
-                <BudgetList
-                  budget_job={budget?.budget_job}
-                  id_obra={params.id}
-                />
-              ) : (
-                <p className=" text-sm font-normal text-center text-neutral-700">
-                  Agregue trabajos a la lista
-                </p>
-              )}
+            <Suspense fallback={<BudgetJobSkeleton />}>
+              <BudgetList id_obra={params.id} />
             </Suspense>
           </div>
         </section>

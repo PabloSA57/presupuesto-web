@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import SideBar from "@/app/ui/dashboard/sidebar";
 
 const layout = ({
@@ -11,7 +11,8 @@ const layout = ({
       <>
         <SideBar />
 
-        <div className=" h-mobilemain md:h-screen w-full md:ml-[30px] lg:ml-[210px] mb-[48px] md:mb-0 bg-neutral-900 md:p-6">
+        <div className=" h-mobilemain md:h-screen w-full md:ml-[55px] lg:ml-[210px] mb-[48px] md:mb-0 bg-neutral-900 md:p-6">
+          {/*<Suspense fallback={<h3>Loading.....</h3>}>{children}</Suspense>*/}
           {children}
         </div>
       </>

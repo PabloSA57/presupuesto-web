@@ -10,8 +10,8 @@ import {
 } from "@react-pdf/renderer";
 //import { PDFViewer } from "@react-pdf/renderer";
 
-import { BiDownload } from "react-icons/bi";
-import { FiLoader } from "react-icons/fi";
+import {BiDownload} from "react-icons/bi";
+import {FiLoader} from "react-icons/fi";
 
 const styles = StyleSheet.create({
   page: {
@@ -31,14 +31,14 @@ const styles = StyleSheet.create({
   },
 });
 
-type BudgetJob = { name: string; total_labour: number };
+type BudgetJob = {name: string; total_labour: number};
 type Budget = {
   budget_job: BudgetJob[];
   total: number;
 };
-const MyDocument = ({ data }: { data: Budget }) => {
+const MyDocument = ({data}: {data: Budget}) => {
   return (
-    <Document style={{ width: "100%" }}>
+    <Document style={{width: "100%"}}>
       <Page size="A4" style={styles.page} key={"presupuesto-1"}>
         <View
           style={{
@@ -51,7 +51,7 @@ const MyDocument = ({ data }: { data: Budget }) => {
           <View style={styles.column}>
             <Text>Nombre</Text>
           </View>
-          <View style={{ ...styles.column, alignItems: "flex-end" }}>
+          <View style={{...styles.column, alignItems: "flex-end"}}>
             <Text>Precio</Text>
           </View>
         </View>
@@ -61,7 +61,7 @@ const MyDocument = ({ data }: { data: Budget }) => {
             <View style={styles.column}>
               <Text>{d?.name}</Text>
             </View>
-            <View style={{ ...styles.column, alignItems: "flex-end" }}>
+            <View style={{...styles.column, alignItems: "flex-end"}}>
               <Text>${d?.total_labour}</Text>
             </View>
           </View>
@@ -94,19 +94,19 @@ const MyDocument = ({ data }: { data: Budget }) => {
       <MyDocument data={data} />
     </PDFViewer> */
 
-const PdfCointainer = ({ data }: { data: Budget }) => {
+const PdfCointainer = ({data}: {data: Budget}) => {
   return (
     <PDFDownloadLink
       document={<MyDocument data={data} />}
       fileName="presupuesto.pdf"
     >
-      {({ blob, url, loading, error }) =>
+      {({blob, url, loading, error}) =>
         loading ? (
           <span className="text-center text-sm animate-spin">
             <FiLoader />
           </span>
         ) : (
-          <button className="  text-base ">
+          <button className="text-xl rounded-full p-1 hover:bg-neutral-300">
             <BiDownload />
           </button>
         )

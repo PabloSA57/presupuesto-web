@@ -1,19 +1,18 @@
-import { Obras } from "@/app/libs/type";
 import Image from "next/image";
 import React from "react";
-import { BiCalendar, BiCircleThreeQuarter, BiEdit } from "react-icons/bi";
-import { FaLocationPin } from "react-icons/fa6";
+import {BiCalendar, BiCircleThreeQuarter} from "react-icons/bi";
+import {FaLocationPin} from "react-icons/fa6";
 import CardInfo from "../card-info";
-import { createClient } from "@/app/utils/supabase/server";
-import { cookies } from "next/headers";
+import {createClient} from "@/app/utils/supabase/server";
+import {cookies} from "next/headers";
 import ButtonModal from "./btn-modal";
-import { FiEdit } from "react-icons/fi";
+import {FiEdit} from "react-icons/fi";
 import FormUpdateObra from "./form-update-obra";
 
-const HeroObra = async ({ obra_id }: { obra_id: number | string }) => {
+const HeroObra = async ({obra_id}: {obra_id: number | string}) => {
   const supabase = createClient(cookies());
 
-  const { data: obra } = await supabase
+  const {data: obra} = await supabase
     .from("obras")
     .select()
     .eq("id", obra_id)
@@ -25,7 +24,7 @@ const HeroObra = async ({ obra_id }: { obra_id: number | string }) => {
         <h4 className=" font-bold">{obra?.name}</h4>
 
         <ButtonModal
-          style="absolute right-0 border-none active:text-red-400 p-1 w-fit h-fit text-base md:text-lg"
+          style="absolute right-0 border-none active:text-red-400 p-1 w-fit h-fit text-base md:text-lg rounded-full hover:bg-neutral-300"
           content={<FiEdit />}
         >
           <FormUpdateObra obra={obra} />
